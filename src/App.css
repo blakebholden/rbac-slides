@@ -485,6 +485,37 @@ body {
   border-left: 7px solid var(--light-teal);
 }
 
+/* Index flow items */
+.index-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.index-flow-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.index-flow-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Space Mono', monospace;
+  color: var(--dark-ink);
+  flex-shrink: 0;
+}
+
 /* Attribute mapping — vertical steps */
 .attr-steps {
   margin: 12px 0;

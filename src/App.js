@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Hero from './sections/Hero';
 import Classifications from './sections/Classifications';
+import Indexing from './sections/Indexing';
 import Pipeline from './sections/Pipeline';
 import Simulator from './sections/Simulator';
 import Patterns from './sections/Patterns';
@@ -11,6 +12,7 @@ import Summary from './sections/Summary';
 const sections = [
   { id: 'hero', label: 'Overview' },
   { id: 'classifications', label: 'Classifications' },
+  { id: 'indexing', label: 'Index & Marking' },
   { id: 'pipeline', label: 'RAG Pipeline' },
   { id: 'simulator', label: 'Access Simulator' },
   { id: 'patterns', label: 'Patterns' },
@@ -68,6 +70,7 @@ function App() {
       <main className="main-content" onScroll={handleScroll}>
         <Hero />
         <Classifications />
+        <Indexing />
         <Pipeline />
         <Simulator />
         <Patterns />
