@@ -60,10 +60,6 @@ function App() {
             </button>
           ))}
         </div>
-        <div className="sidebar-footer">
-          <span className="cls-badge ts" style={{ fontSize: 9 }}>TS/SCI</span>
-          <span style={{ fontSize: 11, color: 'var(--ink)', marginLeft: 6 }}>Demo Environment</span>
-        </div>
       </nav>
 
       {/* Main content */}
