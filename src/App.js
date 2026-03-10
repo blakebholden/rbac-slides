@@ -45,7 +45,7 @@ function App() {
       {/* Sidebar nav */}
       <nav className="sidebar">
         <div className="sidebar-logo">
-          <svg width="24" height="24" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#FEC514"/><circle cx="32" cy="32" r="20" fill="#48EFCF"/><circle cx="32" cy="32" r="10" fill="#F04E98"/></svg>
+          <img src="/elastic-favicon.svg" alt="Elastic" width="24" height="24" />
           <span>elastic</span>
         </div>
         <div className="sidebar-title">RBAC/ABAC<br/>for Classified RAG</div>
