@@ -75,9 +75,6 @@ function App() {
         <Patterns />
         <Summary />
       </main>
-
-      {/* Bottom banner */}
-      <div className="bottom-banner">TOP SECRET // SCI // NOFORN</div>
     </div>
   );
 }
