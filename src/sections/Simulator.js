@@ -20,6 +20,12 @@ const documents = [
 
 const clsOrder = { u: 0, cui: 1, c: 2, s: 3, ts: 4 };
 const clsLabels = { u: 'UNCLASS', cui: 'CUI', c: 'CONF', s: 'SECRET', ts: 'TOP SECRET' };
+const clsHierarchy = ['U', 'CUI', 'C', 'S', 'TS'];
+
+function getAllowedLevels(clearance) {
+  const maxIdx = clsOrder[clearance];
+  return clsHierarchy.slice(0, maxIdx + 1);
+}
 
 function canAccess(doc, analyst) {
   if (clsOrder[doc.cls] > clsOrder[analyst.clearance]) return false;
@@ -103,22 +109,41 @@ export default function Simulator() {
           </div>
 
           <div className="card" style={{ marginBottom: 16 }}>
-            <h3>Elasticsearch DLS Query</h3>
+            <h3>What the AI App Sends</h3>
             <div className="teal-rule" />
+            <pre className="code-block">{`GET /intel-*/_search
+{
+  "query": {
+    "match": { "content": "<user query>" }
+  }
+}`}</pre>
+          </div>
+
+          <div className="card" style={{ marginBottom: 16 }}>
+            <h3>What Elasticsearch Actually Executes</h3>
+            <div className="teal-rule" />
+            <p style={{ marginBottom: 8 }}>DLS merges the user's role filters into the query automatically:</p>
             <pre className="code-block">{`GET /intel-*/_search
 {
   "query": {
     "bool": {
       "must": {
         "match": { "content": "<user query>" }
-      }
+      },
+      "filter": [
+        { "terms": {
+            "classification": ${JSON.stringify(getAllowedLevels(analyst.clearance))}
+        }},${analyst.compartments.length > 0 ? `
+        { "terms": {
+            "compartments": ${JSON.stringify(analyst.compartments)}
+        }},` : ''}
+        { "term": {
+            "releasability": "${analyst.noforn ? 'USA' : '*'}"
+        }}
+      ]
     }
   }
-}
-
-// DLS auto-appends:
-// classification <= ${analyst.clearanceLabel}
-// compartments IN [${analyst.compartments.length > 0 ? analyst.compartments.join(', ') : 'none'}]${analyst.noforn ? '\n// NOFORN: authorized' : '\n// NOFORN: NOT authorized'}`}</pre>
+}`}</pre>
           </div>
 
           <div className="callout">

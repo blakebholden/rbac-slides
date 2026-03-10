@@ -60,20 +60,20 @@ export default function Pipeline() {
           <div className="pattern-label">STEP 2</div>
           <h3>DLS Enforcement</h3>
           <div className="teal-rule" />
-          <p style={{ marginBottom: 8 }}>Document-Level Security appends a filter to the query:</p>
-          <pre className="code-block">{`"query": {
-  "bool": {
-    "filter": [
-      {"term": {
-        "classification": "TS"
-      }},
-      {"terms": {
-        "compartments":
-          ["SCI","HCS"]
-      }}
-    ]
-  }
-}`}</pre>
+          <p style={{ marginBottom: 8 }}>DLS merges a filter into every query automatically:</p>
+          <pre className="code-block">{`"filter": [
+  { "terms": {
+      "classification":
+        ["U","CUI","C","S","TS"]
+  }},
+  { "terms": {
+      "compartments":
+        ["SCI","HCS"]
+  }},
+  { "term": {
+      "releasability": "USA"
+  }}
+]`}</pre>
         </div>
         <div className="card">
           <div className="pattern-label">STEP 3</div>
