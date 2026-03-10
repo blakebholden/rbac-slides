@@ -71,27 +71,33 @@ export default function Identity() {
             Elasticsearch uses <strong>role mappings</strong> to automatically assign the right roles.
           </p>
 
-          {/* Mini visual: attribute to role */}
-          <div className="attr-mapping">
-            <div className="attr-box">
-              <div className="attr-header">IdP Token Attributes</div>
-              <div className="attr-row"><span className="attr-key">clearance</span><span className="cls-badge ts" style={{ fontSize: 9 }}>TS</span></div>
-              <div className="attr-row"><span className="attr-key">compartments</span><span className="cls-badge sci" style={{ fontSize: 9 }}>SCI</span><span className="cls-badge hcs" style={{ fontSize: 9 }}>HCS</span></div>
-              <div className="attr-row"><span className="attr-key">org</span><span style={{ fontSize: 12, color: 'var(--ink)' }}>DIA</span></div>
+          {/* Vertical stepped mapping */}
+          <div className="attr-steps">
+            <div className="attr-step">
+              <div className="attr-step-label">IdP Token Attributes</div>
+              <div className="attr-step-content">
+                <span className="attr-key">clearance:</span> <span className="cls-badge ts" style={{ fontSize: 10 }}>TS</span>
+                <span className="attr-key" style={{ marginLeft: 12 }}>compartments:</span> <span className="cls-badge sci" style={{ fontSize: 10 }}>SCI</span> <span className="cls-badge hcs" style={{ fontSize: 10 }}>HCS</span>
+                <span className="attr-key" style={{ marginLeft: 12 }}>org:</span> <span style={{ fontSize: 12, color: 'var(--ink)' }}>DIA</span>
+              </div>
             </div>
-            <div className="attr-arrow">&#8594;</div>
-            <div className="attr-box">
-              <div className="attr-header">Elasticsearch Roles</div>
-              <div className="attr-row"><code className="role-tag">role_topsecret</code></div>
-              <div className="attr-row"><code className="role-tag">compartment_sci</code></div>
-              <div className="attr-row"><code className="role-tag">compartment_hcs</code></div>
+            <div className="attr-step-arrow">&#8595;</div>
+            <div className="attr-step">
+              <div className="attr-step-label">Elasticsearch Roles (auto-assigned)</div>
+              <div className="attr-step-content">
+                <code className="role-tag">role_topsecret</code>
+                <code className="role-tag">compartment_sci</code>
+                <code className="role-tag">compartment_hcs</code>
+              </div>
             </div>
-            <div className="attr-arrow">&#8594;</div>
-            <div className="attr-box">
-              <div className="attr-header">Auto-Applied Filters</div>
-              <div className="attr-row"><span className="filter-tag">DLS: classification ≤ TS</span></div>
-              <div className="attr-row"><span className="filter-tag">DLS: compartments ∈ [SCI, HCS]</span></div>
-              <div className="attr-row"><span className="filter-tag">FLS: source_id hidden</span></div>
+            <div className="attr-step-arrow">&#8595;</div>
+            <div className="attr-step">
+              <div className="attr-step-label">Filters Applied to Every Query</div>
+              <div className="attr-step-content">
+                <span className="filter-tag">DLS: classification &le; TS</span>
+                <span className="filter-tag">DLS: compartments &isin; [SCI, HCS]</span>
+                <span className="filter-tag">FLS: source_id hidden</span>
+              </div>
             </div>
           </div>
 

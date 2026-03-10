@@ -485,23 +485,22 @@ body {
   border-left: 7px solid var(--light-teal);
 }
 
-/* Attribute mapping visual */
-.attr-mapping {
-  display: flex;
-  align-items: stretch;
-  gap: 8px;
-  margin: 8px 0;
-  padding: 14px;
+/* Attribute mapping — vertical steps */
+.attr-steps {
+  margin: 12px 0;
+  padding: 16px;
   background: var(--light-grey);
   border-radius: 8px;
 }
 
-.attr-box {
-  flex: 1;
-  min-width: 0;
+.attr-step {
+  padding: 12px 14px;
+  background: var(--white);
+  border: 1.5px solid #e0e0e0;
+  border-radius: 6px;
 }
 
-.attr-header {
+.attr-step-label {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -512,46 +511,42 @@ body {
   border-bottom: 2px solid var(--light-teal);
 }
 
-.attr-row {
+.attr-step-content {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 6px;
-  min-height: 24px;
+  flex-wrap: wrap;
+}
+
+.attr-step-arrow {
+  text-align: center;
+  color: var(--elastic-blue);
+  font-size: 20px;
+  font-weight: 700;
+  padding: 4px 0;
 }
 
 .attr-key {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
   color: var(--ink);
-  min-width: 70px;
-}
-
-.attr-arrow {
-  display: flex;
-  align-items: center;
-  color: var(--elastic-blue);
-  font-size: 20px;
-  font-weight: 700;
-  flex-shrink: 0;
-  padding: 0 2px;
 }
 
 .role-tag {
   font-family: 'Space Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   background: var(--developer-blue);
   color: var(--light-teal);
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: 3px;
 }
 
 .filter-tag {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   background: #e8f5e9;
   color: #2e7d32;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: 3px;
   font-family: 'Space Mono', monospace;
 }
