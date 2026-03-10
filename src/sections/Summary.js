@@ -47,14 +47,14 @@ export default function Summary() {
               <li>Leverage existing IdP and role infrastructure</li>
               <li>Works with any LLM or AI framework</li>
               <li>Real-time enforcement — no batch sync</li>
-              <li>Proven at scale in IC/DoD environments</li>
+              <li>Proven at scale in national security environments</li>
             </ul>
           </div>
         </div>
 
         <div style={{ textAlign: 'center', marginTop: 48, color: 'rgba(255,255,255,0.5)', fontSize: 14, lineHeight: 1.6 }}>
           Elasticsearch RBAC/ABAC brings the same access control rigor to Gen AI<br />
-          that the IC already applies to traditional search and analytics.
+          that national security organizations already apply to traditional search and analytics.
         </div>
       </div>
     </section>

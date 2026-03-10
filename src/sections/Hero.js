@@ -21,7 +21,7 @@ export default function Hero() {
         </h1>
         <div style={{ width: 50, height: 3, background: 'var(--light-teal)', marginBottom: 16 }} />
         <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.75)', maxWidth: 700, lineHeight: 1.6, marginBottom: 40 }}>
-          Enforcing IC/DoD classification markings in Elasticsearch to secure
+          Enforcing national security classification markings in Elasticsearch to secure
           Gen AI retrieval-augmented generation pipelines. Document-Level Security
           and Field-Level Security ensure the LLM only sees what clearance allows.
         </p>

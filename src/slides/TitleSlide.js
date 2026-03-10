@@ -16,7 +16,7 @@ export default function TitleSlide() {
       <div style={{ width: 60, height: 3, background: 'var(--light-teal)', margin: '0 auto 24px' }} />
 
       <div style={{ fontSize: 18, color: 'rgba(255,255,255,0.7)', marginBottom: 36, maxWidth: 650 }}>
-        Enforcing IC/DoD classification markings in Elasticsearch
+        Enforcing national security classification markings in Elasticsearch
         to secure Gen AI retrieval pipelines
       </div>
 

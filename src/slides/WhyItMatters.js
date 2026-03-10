@@ -52,7 +52,7 @@ export default function WhyItMatters() {
 
         <div style={{ marginTop: 30, fontSize: 18, color: 'rgba(255,255,255,0.5)', maxWidth: 700 }}>
           Elasticsearch RBAC/ABAC brings the same access control rigor to Gen AI
-          that the IC already applies to traditional search and analytics.
+          that national security organizations already apply to traditional search and analytics.
         </div>
 
       </div>
