@@ -5,6 +5,7 @@ import Classifications from './sections/Classifications';
 import Pipeline from './sections/Pipeline';
 import Simulator from './sections/Simulator';
 import Patterns from './sections/Patterns';
+import Identity from './sections/Identity';
 import Summary from './sections/Summary';
 
 const sections = [
@@ -13,6 +14,7 @@ const sections = [
   { id: 'pipeline', label: 'RAG Pipeline' },
   { id: 'simulator', label: 'Access Simulator' },
   { id: 'patterns', label: 'Patterns' },
+  { id: 'identity', label: 'Identity & IdP' },
   { id: 'summary', label: 'Summary' },
 ];
 
@@ -69,6 +71,7 @@ function App() {
         <Pipeline />
         <Simulator />
         <Patterns />
+        <Identity />
         <Summary />
       </main>
     </div>
