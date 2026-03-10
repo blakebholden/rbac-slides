@@ -667,3 +667,135 @@ body {
   color: var(--ink);
   line-height: 1.4;
 }
+
+/* ========================================
+   RESPONSIVE — mobile & tablet
+   ======================================== */
+
+@media (max-width: 1024px) {
+  /* Collapse sidebar to top nav */
+  .app-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 16px;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    overflow-x: auto;
+    gap: 12px;
+  }
+
+  .sidebar-logo { margin-bottom: 0; }
+  .sidebar-title { display: none; }
+
+  .sidebar-links {
+    flex-direction: row;
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+
+  .sidebar-link {
+    white-space: nowrap;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .sidebar-link.active {
+    border-left: none;
+    border-bottom: 3px solid var(--elastic-blue);
+  }
+
+  /* Sections */
+  .section { padding: 40px 32px; }
+  .section-hero { padding: 50px 32px; }
+  .section-summary { padding: 50px 32px; }
+
+  /* Grids to 2-col or 1-col */
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .sim-grid { grid-template-columns: 1fr; }
+
+  /* Flow row wrap */
+  .flow-row { flex-wrap: wrap; justify-content: center; }
+
+  /* Identity flow wrap */
+  .identity-flow { flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .id-connector { width: 30px; }
+}
+
+@media (max-width: 640px) {
+  /* Top banner smaller */
+  .top-banner {
+    padding: 10px 12px;
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+  .top-banner .demo-label {
+    font-size: 14px;
+    letter-spacing: 4px;
+  }
+
+  /* Sidebar becomes minimal */
+  .sidebar { padding: 8px 12px; }
+  .sidebar-logo span { display: none; }
+  .sidebar-link { font-size: 11px; padding: 5px 8px; }
+
+  /* Sections tighter */
+  .section { padding: 28px 18px; }
+  .section-hero { padding: 36px 18px; }
+  .section-summary { padding: 36px 18px; }
+
+  .section-title { font-size: 22px; }
+  .section-subtitle { font-size: 13px; }
+
+  /* All grids to single col */
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .sim-grid { grid-template-columns: 1fr; }
+
+  /* Sim top bar stack */
+  .sim-top-bar { flex-direction: column; align-items: flex-start; }
+  .sim-controls { flex-wrap: wrap; }
+  .sim-stats { width: 100%; justify-content: space-around; }
+
+  /* Code blocks scroll */
+  .code-block { font-size: 10px; padding: 10px 12px; }
+
+  /* Flow boxes smaller */
+  .flow-box { min-width: 80px; padding: 10px 12px; font-size: 12px; }
+  .flow-arrow { font-size: 16px; }
+
+  /* Identity flow vertical on mobile */
+  .identity-flow {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px;
+  }
+  .id-step { min-width: auto; }
+  .id-connector {
+    width: 3px;
+    height: 30px;
+    margin: 0;
+    margin-bottom: 0;
+  }
+  .id-connector::after {
+    right: auto;
+    bottom: -6px;
+    top: auto;
+    left: -4px;
+    border: 5px solid transparent;
+    border-top: 7px solid var(--light-teal);
+    border-left: 5px solid transparent;
+  }
+
+  /* Tables scroll horizontally */
+  .cls-table { display: block; overflow-x: auto; }
+
+  /* Stat cards */
+  .stat-card { padding: 14px; }
+  .stat-number { font-size: 24px; }
+}
