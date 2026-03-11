@@ -85,20 +85,18 @@ es-security-runas-user: analyst_a
             Documents carry classification attributes in a <code style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, background: 'var(--light-grey)', padding: '1px 5px', borderRadius: 3 }}>metadata</code> object.
             Role templates reference the user's security attributes stored in <code style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, background: 'var(--light-grey)', padding: '1px 5px', borderRadius: 3 }}>_user.metadata</code> for dynamic DLS.
           </p>
-          <pre className="code-block" style={{ flex: 1 }}>{`// Document with metadata attributes:
+          <pre className="code-block" style={{ flex: 1 }}>{`// Document fields (top-level):
 {
   "title": "SAT Image Bravo",
-  "metadata": {
-    "classification": "TS",
-    "compartments": ["SCI","TK"],
-    "releasability": ["USA"]
-  },
+  "classification": "TS",
+  "compartments": ["SCI","TK"],
+  "releasability": ["USA"],
   "content_vector": [0.12, ...]
 }
 
 // Role template references
-// _user.metadata — populated from
-// IdP attributes at login:
+// _user.metadata (user's IdP attrs)
+// to filter document fields:
 {
   "indices": [{
     "names": ["intel-*"],
@@ -107,7 +105,7 @@ es-security-runas-user: analyst_a
       "template": {
         "source": {
           "terms": {
-            "metadata.compartments":
+            "compartments":
     "{{_user.metadata.compartments}}"
           }
         }

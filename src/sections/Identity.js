@@ -102,7 +102,7 @@ export default function Identity() {
   "template": {
     "source": {
       "terms": {
-        "metadata.compartments":
+        "compartments":
           "{{_user.metadata.compartments}}"
       }
     }
