@@ -33,7 +33,7 @@ export default function Indexing() {
   "caveats":         ["NOFORN", "ORCON"],
   "source_type":     "HUMINT",
   "date_classified": "2026-01-15",
-  "classified_by":   "OCA-DIA-2024-0042",
+  "classified_by":   "OCA-ACME-2024-0042",
   "downgrade_date":  "2036-01-15"
 }`}</pre>
         </div>

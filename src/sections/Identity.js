@@ -91,7 +91,7 @@ export default function Identity() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <span className="attr-key">OIDC:</span>
                   <code className="role-tag" style={{ fontSize: 10 }}>_user.metadata.oidc(org)</code>
-                  <span style={{ fontSize: 12, color: 'var(--ink)' }}>DIA</span>
+                  <span style={{ fontSize: 12, color: 'var(--ink)' }}>ACME-INTEL</span>
                 </div>
               </div>
             </div>
@@ -196,7 +196,7 @@ export default function Identity() {
 _user.metadata.saml(clearance)       // "TS"
 _user.metadata.saml(compartments)    // ["SCI","HCS"]
 _user.metadata.saml(releasability)   // ["USA"]
-_user.metadata.saml(organization)    // "DIA"
+_user.metadata.saml(organization)    // "ACME-INTEL"
 
 // Custom attributes from your SAML
 // provider token are automatically
@@ -214,7 +214,7 @@ _user.metadata.saml(organization)    // "DIA"
 _user.metadata.oidc(clearance)       // "TS"
 _user.metadata.oidc(compartments)    // ["SCI","HCS"]
 _user.metadata.oidc(releasability)   // ["USA"]
-_user.metadata.oidc(org)             // "DIA"
+_user.metadata.oidc(org)             // "ACME-INTEL"
 
 // claim_name is the name of the claim
 // as it was contained in the ID Token
