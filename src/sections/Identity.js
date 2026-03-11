@@ -68,42 +68,61 @@ export default function Identity() {
           </p>
           <p style={{ marginBottom: 16 }}>
             The IdP sends attributes about the user — clearance level, compartment access, organization — and
-            Elasticsearch uses <strong>role mappings</strong> to automatically assign the right roles.
+            Elasticsearch stores them in the <code style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, background: 'var(--light-grey)', padding: '1px 5px', borderRadius: 3 }}>_user.metadata</code> object.
+            Role mappings then use these attributes to automatically assign the right roles.
           </p>
 
           {/* Vertical stepped mapping */}
           <div className="attr-steps">
             <div className="attr-step">
-              <div className="attr-step-label">IdP Token Attributes</div>
-              <div className="attr-step-content">
-                <span className="attr-key">clearance:</span> <span className="cls-badge ts" style={{ fontSize: 10 }}>TS</span>
-                <span className="attr-key" style={{ marginLeft: 12 }}>compartments:</span> <span className="cls-badge sci" style={{ fontSize: 10 }}>SCI</span> <span className="cls-badge hcs" style={{ fontSize: 10 }}>HCS</span>
-                <span className="attr-key" style={{ marginLeft: 12 }}>org:</span> <span style={{ fontSize: 12, color: 'var(--ink)' }}>DIA</span>
+              <div className="attr-step-label">IdP Attributes → _user.metadata</div>
+              <div className="attr-step-content" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 4 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span className="attr-key">SAML:</span>
+                  <code className="role-tag" style={{ fontSize: 10 }}>_user.metadata.saml(clearance)</code>
+                  <span className="cls-badge ts" style={{ fontSize: 9 }}>TS</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span className="attr-key">SAML:</span>
+                  <code className="role-tag" style={{ fontSize: 10 }}>_user.metadata.saml(compartments)</code>
+                  <span className="cls-badge sci" style={{ fontSize: 9 }}>SCI</span>
+                  <span className="cls-badge hcs" style={{ fontSize: 9 }}>HCS</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span className="attr-key">OIDC:</span>
+                  <code className="role-tag" style={{ fontSize: 10 }}>_user.metadata.oidc(org)</code>
+                  <span style={{ fontSize: 12, color: 'var(--ink)' }}>DIA</span>
+                </div>
               </div>
             </div>
             <div className="attr-step-arrow">&#8595;</div>
             <div className="attr-step">
-              <div className="attr-step-label">Elasticsearch Roles (auto-assigned)</div>
-              <div className="attr-step-content">
-                <code className="role-tag">role_topsecret</code>
-                <code className="role-tag">compartment_sci</code>
-                <code className="role-tag">compartment_hcs</code>
-              </div>
+              <div className="attr-step-label">Role Template References _user.metadata</div>
+              <pre className="code-block" style={{ margin: 0, fontSize: 11 }}>{`"query": {
+  "template": {
+    "source": {
+      "terms": {
+        "metadata.compartments":
+          "{{_user.metadata.compartments}}"
+      }
+    }
+  }
+}`}</pre>
             </div>
             <div className="attr-step-arrow">&#8595;</div>
             <div className="attr-step">
               <div className="attr-step-label">Filters Applied to Every Query</div>
               <div className="attr-step-content">
-                <span className="filter-tag">DLS: classification &le; TS</span>
-                <span className="filter-tag">DLS: compartments &isin; [SCI, HCS]</span>
+                <span className="filter-tag">DLS: classification ∈ [U, CUI, C, S, TS]</span>
+                <span className="filter-tag">DLS: compartments ∈ [SCI, HCS]</span>
                 <span className="filter-tag">FLS: source_id hidden</span>
               </div>
             </div>
           </div>
 
-          <p style={{ marginTop: 16 }}>
+          <p style={{ marginTop: 16, marginBottom: 0 }}>
             The security team manages access in the IdP — where they already manage everything else.
-            No one manually assigns Elasticsearch roles. The filters stay in sync with the source of truth for identity.
+            The <code style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, background: 'var(--light-grey)', padding: '1px 5px', borderRadius: 3 }}>_user.metadata</code> object stays in sync automatically. No one manually assigns Elasticsearch roles.
           </p>
         </div>
 
@@ -160,6 +179,46 @@ export default function Identity() {
             The user logs in once through your front door. The access control follows them all the way
             down to the data layer — without any additional accounts or passwords to manage.
           </p>
+        </div>
+      </div>
+
+      {/* SAML vs OIDC metadata reference */}
+      <div className="grid-2" style={{ marginTop: 24 }}>
+        <div className="card">
+          <div className="pattern-label">SAML</div>
+          <h3>_user.metadata.saml(attribute_name)</h3>
+          <div className="teal-rule" />
+          <p style={{ marginBottom: 10 }}>
+            SAML attributes from the identity provider's assertion are stored in the user's metadata object.
+            Access them in role templates using the SAML attribute name as defined in your IdP configuration.
+          </p>
+          <pre className="code-block" style={{ fontSize: 11 }}>{`// SAML attribute examples:
+_user.metadata.saml(clearance)       // "TS"
+_user.metadata.saml(compartments)    // ["SCI","HCS"]
+_user.metadata.saml(releasability)   // ["USA"]
+_user.metadata.saml(organization)    // "DIA"
+
+// Custom attributes from your SAML
+// provider token are automatically
+// available in the same pattern.`}</pre>
+        </div>
+        <div className="card">
+          <div className="pattern-label">OIDC</div>
+          <h3>_user.metadata.oidc(claim_name)</h3>
+          <div className="teal-rule" />
+          <p style={{ marginBottom: 10 }}>
+            OIDC claims from the ID Token or User Info response are stored in the user's metadata object.
+            The claim name matches exactly what was contained in the token.
+          </p>
+          <pre className="code-block" style={{ fontSize: 11 }}>{`// OIDC claim examples:
+_user.metadata.oidc(clearance)       // "TS"
+_user.metadata.oidc(compartments)    // ["SCI","HCS"]
+_user.metadata.oidc(releasability)   // ["USA"]
+_user.metadata.oidc(org)             // "DIA"
+
+// claim_name is the name of the claim
+// as it was contained in the ID Token
+// or in the User Info response.`}</pre>
         </div>
       </div>
 

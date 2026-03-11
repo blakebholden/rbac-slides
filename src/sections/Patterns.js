@@ -82,18 +82,23 @@ es-security-runas-user: analyst_a
           <h3>ABAC with Document Metadata</h3>
           <div className="teal-rule" />
           <p style={{ marginBottom: 12 }}>
-            Documents carry classification metadata. Role templates use user attributes for dynamic DLS.
+            Documents carry classification attributes in a <code style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, background: 'var(--light-grey)', padding: '1px 5px', borderRadius: 3 }}>metadata</code> object.
+            Role templates reference the user's security attributes stored in <code style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, background: 'var(--light-grey)', padding: '1px 5px', borderRadius: 3 }}>_user.metadata</code> for dynamic DLS.
           </p>
-          <pre className="code-block" style={{ flex: 1 }}>{`// Document metadata:
+          <pre className="code-block" style={{ flex: 1 }}>{`// Document with metadata attributes:
 {
   "title": "SAT Image Bravo",
-  "classification": "TS",
-  "compartments": ["SCI","TK"],
-  "releasability": ["USA"],
+  "metadata": {
+    "classification": "TS",
+    "compartments": ["SCI","TK"],
+    "releasability": ["USA"]
+  },
   "content_vector": [0.12, ...]
 }
 
-// Role template uses user attrs:
+// Role template references
+// _user.metadata — populated from
+// IdP attributes at login:
 {
   "indices": [{
     "names": ["intel-*"],
@@ -102,8 +107,8 @@ es-security-runas-user: analyst_a
       "template": {
         "source": {
           "terms": {
-            "compartments":
-              "{{_user.compartments}}"
+            "metadata.compartments":
+    "{{_user.metadata.compartments}}"
           }
         }
       }
